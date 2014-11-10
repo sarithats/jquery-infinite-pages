@@ -33,7 +33,6 @@ Released under the MIT License
       @options = $.extend({}, @defaults, options)
       @$container = $(container)
       @$table = $(container).find('table')
-      
       @init()
       
     # Setup and bind to related events
@@ -43,7 +42,7 @@ Released under the MIT License
       scrollTimeout = null
       scrollHandler = (=> @check())
       
-      $(window).scroll ->
+      @$container.scroll ->
         if scrollTimeout
           clearTimeout(scrollTimeout)
           scrollTimeout = null
@@ -60,7 +59,7 @@ Released under the MIT License
       if nav.size() == 0
         @_log "No more pages to load"
       else
-        windowBottom = $(window).scrollTop() + $(window).height()
+        windowBottom = @$container.scrollTop() + @$container.height()
         distance = nav.offset().top - windowBottom
         
         if @options.state.paused
